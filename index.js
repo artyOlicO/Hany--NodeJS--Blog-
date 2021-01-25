@@ -5,9 +5,23 @@ const mongoose= require('mongoose');
 const authMiddleware= require('./middlewares/auth');
 
 
+
 const app= express();
 
-mongoose.connect('mongodb://localhost:27017/blogSystem', {useNewUrlParser: true});
+// mongoose.connect('mongodb://localhost:27017/blogSystem', {useNewUrlParser: true});
+const url="mongodb+srv://asd:asd@cluster0.y7wlf.mongodb.net/blogSystem?retryWrites=true&w=majority";
+mongoose.connect(url,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
+    .then(() => console.log("Database Connected Successfully"))
+    .catch(err => console.log(err));
+
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://asd:asd@cluster0.y7wlf.mongodb.net/blogSystem?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
 
 
 app.use(express.json());
